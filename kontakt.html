@@ -79,68 +79,95 @@
             transition: all 0.3s ease;
         }
 
-        /* Main Content Padding */
-        .main-content {
-            padding-top: 70px; /* To prevent content from being hidden under the navbar */
-            flex: 1;
-        }
-
-        /* Services */
-        .services {
-            display: flex;
-            flex-wrap: wrap; /* Omogoča prelome vrstic, ko ni dovolj prostora */
-            justify-content: center; /* Poravnava kartic na sredino */
-            gap: 20px; /* Razmik med karticami */
-            padding: 40px 20px;
-            max-width: 960px; /* Omejitev širine za storitvene kartice */
-            margin: 0 auto; /* Poravnava storitvenih kartic na sredino */
-        }
-
-        /* Kartice z ozadjem in prosojnostjo */
-        .service-card {
-            background-image: url('https://thumb.ac-illust.com/8f/8f99958193edeb745abedd67b7f4f2bf_t.jpeg'); /* Dodajte pot do vaše slike */
-            background-size: cover; /* Slika bo prekrila celotno kartico */
-            background-position: center; /* Slika bo poravnana na sredino */
-            background-repeat: no-repeat; /* Slika se ne bo ponavljala */
-            border-radius: 10px;
-            padding: 30px;
+        .contact-form {
+            background-color: #fff;
+            width: 50%; /* Širina obrazca povečana */
+            max-width: 500px; /* Maksimalna širina obrazca */
+            margin: 120px auto 40px auto;  /* Premaknjen obrazec še nižje */
+            padding: 50px;
+            border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: slideUp 1s ease-out;
+        }
+        .contact-form h2 {
             text-align: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #007BFF;
+        }
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .contact-form input, .contact-form textarea {
             width: 100%;
-            max-width: 40%; /* Maksimalna širina kartice */
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            color: #fff; /* Besedilo znotraj kartice bo belo za boljšo berljivost na temnem ozadju */
+            padding: 14px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            resize: none;
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: #007BFF;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
         }
 
-        /* Dodajanje prosojnosti ozadju */
-        .service-card::before {
-            content: ''; /* Prazna vsebina za psevdoselektor */
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.4); /* Črna barva s 40% prosojnostjo */
-            border-radius: 10px;
-            z-index: 1; /* Psevdoselektor bo bil nad ozadjem, a pod vsebino kartice */
+        .btn {
+            background: #FFD700;
+            color: #333;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            width: 100%;
+            display: block;
+        }
+        .btn:hover {
+            background: #FFA500;
+            color: #fff;
         }
 
-        /* Zavarovanje, da besedilo ostane nad prosojnim slojem */
-        .service-card h3, .service-card p {
-            position: relative;
-            z-index: 2; /* Besedilo bo na vrhu */
+        /* Google zemljevid */
+        .map-container {
+            margin-top: 40px;
+            text-align: center;
+        }
+        iframe {
+            width: 100%;
+            height: 500px; /* Višina zemljevida */
+            border: 0;
+            border-radius: 8px;
         }
 
-        /* Hovro efekt */
-        .service-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        /* Animacija za pojav kontaktnega obrazca */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .btn {
+            background: #FFD700;
+            color: #333;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        .btn:hover {
+            background: #FFA500;
+            color: #fff;
         }
 
         /* Footer */
@@ -208,16 +235,6 @@
         }
 
         /* Media Queries */
-        
-        @media (max-width: 1024px) {
-    /* Za zaslone, večje od 768px, ampak manjše od 1024px (tablični računalniki) */
-            .services {
-                justify-content: space-around;
-            }
-            .service-card{
-                max-width: 40%;
-            }
-        }
 
         @media (max-width: 768px) {
             .navbar .nav-links {
@@ -237,19 +254,6 @@
             .hamburger {
                 display: flex;
             }
-            .hero h1 {
-                font-size: 40px;
-            }
-            .hero p {
-                font-size: 18px;
-            }
-            .services {
-                grid-template-columns: 1fr; /* Ena kartica na vrstico na manjših zaslonih */
-            }
-
-            .service-card {
-                max-width: 50%; /* Kartica zavzame širino */
-            }
             .footer-container {
                 flex-direction: column;
                 align-items: center;
@@ -257,34 +261,6 @@
             }
             .footer-column {
                 text-align: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 30px;
-            }
-            .hero p {
-                font-size: 16px;
-            }
-            .btn {
-                padding: 10px 20px;
-                font-size: 16px;
-            }
-            .section-title {
-                font-size: 28px;
-            }
-            .contact-form input, .contact-form textarea {
-                padding: 10px;
-                font-size: 14px;
-            }
-            .contact-form button {
-                padding: 10px;
-                font-size: 16px;
-            }
-            .service-card {
-                padding: 20px; /* Manjša oblika kartice */
-                max-width: 75%;
             }
         }
     </style>
@@ -308,48 +284,31 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <!-- Services Section -->
-        <section class="services">
+ <!-- Kontaktni obrazec -->
+ <div class="contact-form">
+    <h2>Kontaktirajte nas</h2>
+    <form action="mailto:email@gmail.com" method="post" enctype="text/plain">
+        <label for="first-name">Ime:</label>
+        <input type="text" id="first-name" name="first-name" required>
 
-            <div class="service-card">
-                <h3 class="service-title">Kontrolni pregled dlesni</h3>
-                <p>Zobozdravnik pregleda stanje dlesni, preveri vnetje, krvavenje in parodontalne žepke, oceni obloge in zobni kamen ter svetuje ustrezno nego za preprečevanje bolezni dlesni.</p>
-            </div>
+        <label for="last-name">Priimek:</label>
+        <input type="text" id="last-name" name="last-name" required>
 
-            <div class="service-card">
-                <h3 class="service-title">Luščenje in glajenje zobnih korenin</h3>
-                <p>Odstranjevanje zobnega kamna in oblog ter glajenje površine korenin, kar zmanjšuje vnetje in preprečuje napredovanje parodontalne bolezni.</p>
-            </div>
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required>
 
-            <div class="service-card">
-                <h3 class="service-title">Meritve žepov in odmika dlesni</h3>
-                <p>Merjenje globine parodontalnih žepkov ter oceno odmika dlesni od zob, kar pomaga pri odkrivanju in spremljanju parodontalne bolezni.</p>
-            </div>
+        <label for="message">Sporočilo:</label>
+        <textarea id="message" name="message" rows="4" required></textarea>
 
-            <div class="service-card">
-                <h3 class="service-title">Odstanjevanje zobnih oblog</h3>
-                <p>Odstranjevanje mehkih oblog, ki se nabirajo na zobeh in dlesnih, kar preprečuje nastanek zobnega kamna ter zmanjšuje tveganje za vnetje dlesni in karies.</p>
-            </div>
+        <button class="btn" type="submit">Pošlji</button>
+    </form>
+</div>
 
-            <div class="service-card">
-                <h3 class="service-title">Peskanje zobnih površin</h3>
-                <p>Postopek, pri katerem se s pomočjo finega peska odstranijo zobne obloge, pigmentacije in zobni kamen, kar pripomore k čiščenju zob in izboljšanju njihovega izgleda.</p>
-            </div>
-            
-            <div class="service-card">
-                <h3 class="service-title">Poliranje zobnih površin</h3>
-                <p>Glajenje zob po peskanju, da se odstrani morebitne preostale obloge in izboljša sijaj zob, kar pripomore k dolgotrajnejši zaščiti pred nabiranjem oblog.</p>
-            </div>
-
-            <div class="service-card">
-                <h3 class="service-title">Premaz z fluoridnim preparatom</h3>
-                <p>Postopek, pri katerem se na zobne površine nanese fluorid, da se okrepi zobna sklenina, zmanjša občutljivost in prepreči nastanek kariesa.</p>
-            </div>
-
-        </section>
-    </div>
+<!-- Google zemljevid -->
+<div class="map-container">
+    <h2>Kje nas najdete</h2>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13353.628215313784!2d14.317069313755036!3d46.174246089767486!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477ac6201b0ec311%3A0x42e0bb93ee1b1fa7!2sGrenc%2016%2C%204220%20%C5%A0kofja%20Loka!5e1!3m2!1ssl!2ssi!4v1738858585883!5m2!1ssl!2ssi" frameborder="0" style="border:0" allowfullscreen></iframe>
+</div>
 
     <!-- Footer -->
     <footer>

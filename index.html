@@ -115,6 +115,7 @@
             font-size: 18px;
             font-weight: bold;
             transition: all 0.3s ease;
+            border: none;
         }
         .btn:hover {
             background: #FFA500;
@@ -133,60 +134,188 @@
             font-weight: bold;
         }
 
+        /* Main Content Padding */
+        .main-content {
+            padding-top: 70px; /* To prevent content from being hidden under the navbar */
+            flex: 1;
+        }
+
         /* Services */
         .services {
             display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: center;
+            flex-wrap: wrap; /* Omogoča prelome vrstic, ko ni dovolj prostora */
+            justify-content: center; /* Poravnava kartic na sredino */
+            gap: 20px; /* Razmik med karticami */
+            padding: 40px 20px;
+            max-width: 960px; /* Omejitev širine za storitvene kartice */
+            margin: 0 auto; /* Poravnava storitvenih kartic na sredino */
         }
+
+        /* Kartice z ozadjem in prosojnostjo */
         .service-card {
-            background: white;
+            background-image: url('https://thumb.ac-illust.com/8f/8f99958193edeb745abedd67b7f4f2bf_t.jpeg'); /* Dodajte pot do vaše slike */
+            background-size: cover; /* Slika bo prekrila celotno kartico */
+            background-position: center; /* Slika bo poravnana na sredino */
+            background-repeat: no-repeat; /* Slika se ne bo ponavljala */
             border-radius: 10px;
-            padding: 20px;
+            padding: 30px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             text-align: center;
             width: 100%;
-            max-width: 300px;
-        }
-        .service-card h3 {
-            margin: 15px 0;
-            font-size: 20px;
-            color: #007BFF;
-        }
-        .service-card p {
-            color: #555;
+            max-width: 40%; /* Maksimalna širina kartice */
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: #fff; /* Besedilo znotraj kartice bo belo za boljšo berljivost na temnem ozadju */
         }
 
-        /* Contact */
-        .contact-form {
-            display: grid;
-            gap: 20px;
-            max-width: 500px;
-            margin: auto;
+        /* Dodajanje prosojnosti ozadju */
+        .service-card::before {
+            content: ''; /* Prazna vsebina za psevdoselektor */
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.4); /* Črna barva s 40% prosojnostjo */
+            border-radius: 10px;
+            z-index: 1; /* Psevdoselektor bo bil nad ozadjem, a pod vsebino kartice */
         }
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            resize: none;
+
+        /* Zavarovanje, da besedilo ostane nad prosojnim slojem */
+        .service-card h3, .service-card p {
+            position: relative;
+            z-index: 2; /* Besedilo bo na vrhu */
         }
-        .contact-form button {
-            background: #007BFF;
-            color: white;
-            padding: 15px;
-            border: none;
-            border-radius: 5px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.3s;
+
+        /* Hovro efekt */
+        .service-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
         }
-        .contact-form button:hover {
-            background: #0056b3;
-        }
+
+        .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+    }
+    .modal-content {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        width: 400px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        animation: fadeIn 0.3s ease-in-out;
+        position: relative;
+    }
+    .close {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        font-size: 24px;
+        cursor: pointer;
+        color: #333;
+    }
+    .close:hover {
+        color: red;
+    }
+    input, textarea, select {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    .submit-btn {
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        padding: 10px;
+        width: 100%;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .submit-btn:hover {
+        background-color: #0056b3;
+    }
+    .comments-container {
+        margin-top: 20px;
+        background: #f9f9f9;
+        padding: 15px;
+        border-radius: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+    }
+    .review {
+        background: white;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        width: calc(30% - 20px);
+        min-width: 200px;
+        text-align: center;
+        word-wrap: break-word;
+    }
+    .review strong {
+        display: block;
+        font-size: 16px;
+        color: #007BFF;
+    }
+    .review p {
+        font-size: 14px;
+        color: #555;
+        word-break: break-word;
+    }
+    .edit-btn, .delete-btn {
+        background: none;
+        border: none;
+        color: #007BFF;
+        cursor: pointer;
+        margin: 5px;
+    }
+    .edit-btn:hover, .delete-btn:hover {
+        text-decoration: underline;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .info-box {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #28a745; /* Success green */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-top: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    display: none; /* Hidden by default */
+    animation: fadeInOut 2s ease-out;
+}
+@keyframes fadeInOut {
+    0% { opacity: 0; top: 20px; }
+    20% { opacity: 1; top: 40px; }
+    80% { opacity: 1; top: 40px; }
+    100% { opacity: 0; top: 40px; }
+}
 
         /* Footer */
         footer {
@@ -326,8 +455,7 @@
                 <li><a href="index.html">Domov</a></li>
                 <li><a href="storitve.html">Storitve</a></li>
                 <li><a href="#faq">Pogosta vprašanja</a></li>
-                <li><a href="#pricing">Cenik</a></li>
-                <li><a href="#about">O nas</a></li>
+                <li><a href="kontakt.html">Kontakt</a></li>
             </ul>
             <div class="hamburger" onclick="toggleMenu()">
                 <div class="line"></div>
@@ -343,53 +471,73 @@
         <div class="hero-content">
             <h1>Vaš nasmeh je naša prioriteta</h1>
             <p>Izkušnja vrhunske zobozdravstvene oskrbe z našo strokovno ekipo.</p>
-            <a href="#contact" class="btn">Kontaktirajte nas</a>
+            <a href="kontakt.html" class="btn">Kontaktirajte nas</a>
         </div>
     </section>
+
+        <!-- About -->
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">O nas</h2>
+                <p>V naši ordinaciji skrbimo za zdravje in lepoto vašega nasmeha.
+                    Z vrhunskimi storitvami, sodobno opremo in strokovno ekipo zagotavljamo kakovostno oskrbo.
+                    Naš cilj je prijazno in sproščeno okolje.</p>
+            </div>
+        </section>
 
     <!-- Services -->
-    <section id="services" class="section">
-        <div class="container">
-            <h2 class="section-title">Priljubljene Storitve</h2>
-            <div class="services">
-                <div class="service-card">
-                    <h3>Odstranjevanje zobnih oblog</h3>
-                    <p>Zobni kamen je treba redno odstranjevati, saj slabi obzobna tkiva.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Kozmetično zobozdravstvo</h3>
-                    <p>Preoblikujte svoj nasmeh z našimi kozmetičnimi tretmaji.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Ortodontija</h3>
-                    <p>Popoln nasmeh z našimi ortodontskimi rešitvami.</p>
-                </div>
+    <div class="main-content">
+        <!-- Services Section -->
+        <section class="services">
+
+            <div class="service-card">
+                <h3 class="service-title">Kontrolni pregled dlesni</h3>
+                <p>Zobozdravnik pregleda stanje dlesni, preveri vnetje, krvavenje in parodontalne žepke, oceni obloge in zobni kamen ter svetuje ustrezno nego za preprečevanje bolezni dlesni.</p>
             </div>
+
+            <div class="service-card">
+                <h3 class="service-title">Luščenje in glajenje zobnih korenin</h3>
+                <p>Odstranjevanje zobnega kamna in oblog ter glajenje površine korenin, kar zmanjšuje vnetje in preprečuje napredovanje parodontalne bolezni.</p>
+            </div>
+
+            <div class="service-card">
+                <h3 class="service-title">Meritve žepov in odmika dlesni</h3>
+                <p>Merjenje globine parodontalnih žepkov ter oceno odmika dlesni od zob, kar pomaga pri odkrivanju in spremljanju parodontalne bolezni.</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Komentarji -->
+    <section id="comments" class="section">
+        <div class="container">
+            <h2 class="section-title">Mnenja naših strank</h2>
+            <div id="comments-list" class="comments-container">
+                <!-- Tukaj se bodo prikazovali komentarji -->
+            </div>
+            <button class="btn" onclick="openReviewModal()">Oddaj svoje mnenje</button>
         </div>
     </section>
 
-    <!-- About -->
-    <section id="about" class="section">
-        <div class="container">
-            <h2 class="section-title">O nas</h2>
-            <p>V naši ordinaciji skrbimo za zdravje in lepoto vašega nasmeha.
-                Z vrhunskimi storitvami, sodobno opremo in strokovno ekipo zagotavljamo kakovostno oskrbo.
-                Naš cilj je prijazno in sproščeno okolje.</p>
+    <!-- Pojavno okno za oddajo mnenja -->
+    <div id="reviewModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeReviewModal()">&times;</span>
+            <h3>Oddajte svoje mnenje</h3>
+            <label for="stars">Ocena:</label>
+            <select id="stars">
+                <option value="5">★★★★★</option>
+                <option value="4">★★★★☆</option>
+                <option value="3">★★★☆☆</option>
+                <option value="2">★★☆☆☆</option>
+                <option value="1">★☆☆☆☆</option>
+            </select>
+            <label for="name">Vaše ime:</label>
+            <input type="text" id="name" placeholder="Vnesite svoje ime">
+            <label for="comment">Vaše mnenje:</label>
+            <textarea id="comment" placeholder="Napišite svoje mnenje..."></textarea>
+            <button class="btn submit-btn" onclick="submitReview()">Oddaj mnenje</button>
         </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="section">
-        <div class="container">
-            <h2 class="section-title">Kontaktirajte nas</h2>
-            <form class="contact-form">
-                <input type="text" placeholder="Ime" required>
-                <input type="email" placeholder="Email" required>
-                <textarea placeholder="Sporočilo" rows="5" required></textarea>
-                <button type="submit">Pošlji sporočilo</button>
-            </form>
-        </div>
-    </section>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -432,6 +580,73 @@
             const navLinks = document.querySelector('.nav-links');
             navLinks.classList.toggle('active');
         }
+
+        let editingReview = null; // Spremljevalec za urejanje komentarja
+
+function openReviewModal() {
+    document.getElementById('reviewModal').style.display = 'flex';
+}
+
+function closeReviewModal() {
+    document.getElementById('reviewModal').style.display = 'none';
+}
+
+function submitReview() {
+    const stars = document.getElementById('stars').value;
+    const name = document.getElementById('name').value.trim();
+    const comment = document.getElementById('comment').value.trim();
+    if (name && comment) {
+        if (editingReview) {
+            // Posodobi obstoječi komentar
+            editingReview.querySelector('strong').innerText = name;
+            editingReview.querySelector('p').innerText = comment;
+            editingReview.querySelector('div').innerHTML = '★'.repeat(stars);
+            editingReview = null; // Po zaključku urejanja ponastavi
+        } else {
+            // Dodaj nov komentar
+            const reviewHtml = `<div class='review'><strong>${name}</strong><div>${'★'.repeat(stars)}</div><p>${comment}</p><button class='edit-btn' onclick='editReview(this)'>Uredi</button><button class='delete-btn' onclick='deleteReview(this)'>Izbriši</button></div>`;
+            const commentsList = document.getElementById('comments-list');
+            commentsList.insertAdjacentHTML('afterbegin', reviewHtml);
+            while (commentsList.children.length > 3) {
+                commentsList.removeChild(commentsList.lastChild);
+            }
+        }
+        document.getElementById('name').value = '';
+        document.getElementById('comment').value = '';
+        document.getElementById('stars').value = '5';
+        closeReviewModal();
+        showInfoBox(); // Prikaz infoboxa po oddaji
+    } else {
+        alert('Prosimo, izpolnite vsa polja!');
+    }
+}
+
+function editReview(button) {
+    const review = button.parentElement;
+    document.getElementById('name').value = review.querySelector('strong').innerText;
+    document.getElementById('comment').value = review.querySelector('p').innerText;
+    document.getElementById('stars').value = review.querySelector('div').innerText.length;
+    editingReview = review; // Nastavi, da bomo urejali ta komentar
+    openReviewModal();
+}
+
+function deleteReview(button) {
+    button.parentElement.remove();
+    showInfoBox(); // Prikaz infoboxa po brisanju
+}
+
+function showInfoBox() {
+    const infoBox = document.getElementById('infoBox');
+    infoBox.style.display = 'block';
+    setTimeout(() => {
+        infoBox.style.display = 'none';
+    }, 1000); // Skrij infobox po 1 sekundi
+}
+
     </script>
+
+<div id="infoBox" class="info-box">
+    Dejavnost uspešna!
+</div>
 </body>
 </html>
