@@ -308,14 +308,20 @@
     font-size: 16px;
     font-weight: bold;
     display: none; /* Hidden by default */
-    animation: fadeInOut 2s ease-out;
+    z-index: 9999; /* Make sure the info box is on top of other elements */
 }
+
 @keyframes fadeInOut {
     0% { opacity: 0; top: 20px; }
     20% { opacity: 1; top: 40px; }
     80% { opacity: 1; top: 40px; }
-    100% { opacity: 0; top: 40px; }
+    100% { opacity: 0; top: 20px; }
 }
+
+.fade-in-out {
+    animation: fadeInOut 2s ease-out;
+}
+
 
         /* Footer */
         footer {
@@ -637,11 +643,26 @@ function deleteReview(button) {
 
 function showInfoBox() {
     const infoBox = document.getElementById('infoBox');
+    
+    // Preverimo, ali je infobox že viden
+    if (infoBox.style.display === 'block') {
+        return; // Če je že viden, ne delamo ničesar
+    }
+
+    // Nastavimo infobox na prikaz
     infoBox.style.display = 'block';
+    
+    // Dodamo animacijo za prikaz
+    infoBox.classList.add('fade-in-out');
+    
+    // Po končani animaciji skrijemo infobox
     setTimeout(() => {
-        infoBox.style.display = 'none';
-    }, 1000); // Skrij infobox po 1 sekundi
+        infoBox.classList.remove('fade-in-out'); // Odstranimo animacijo
+        infoBox.style.display = 'none'; // Skrijemo infobox po animaciji
+    }, 1900); // Čas animacije je 2 sekundi
 }
+
+
 
     </script>
 

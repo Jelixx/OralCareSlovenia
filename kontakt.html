@@ -81,13 +81,12 @@
 
         .contact-form {
             background-color: #fff;
-            width: 50%; /* Širina obrazca povečana */
-            max-width: 500px; /* Maksimalna širina obrazca */
-            margin: 120px auto 40px auto;  /* Premaknjen obrazec še nižje */
+            width: 50%;
+            max-width: 500px;
+            margin: 120px auto 40px auto;
             padding: 50px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            animation: slideUp 1s ease-out;
         }
         .contact-form h2 {
             text-align: center;
@@ -131,6 +130,34 @@
             background: #FFA500;
             color: #fff;
         }
+
+        .info-box {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #28a745; /* Success green */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin-top: 40px;
+    font-size: 16px;
+    font-weight: bold;
+    display: none; /* Hidden by default */
+    z-index: 9999; /* Make sure the info box is on top of other elements */
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; top: 20px; }
+    20% { opacity: 1; top: 40px; }
+    80% { opacity: 1; top: 40px; }
+    100% { opacity: 0; top: 20px; }
+}
+
+.fade-in-out {
+    animation: fadeInOut 2s ease-out;
+}
+
 
         /* Google zemljevid */
         .map-container {
@@ -284,25 +311,27 @@
         </div>
     </nav>
 
- <!-- Kontaktni obrazec -->
- <div class="contact-form">
-    <h2>Kontaktirajte nas</h2>
-    <form action="mailto:email@gmail.com" method="post" enctype="text/plain">
-        <label for="first-name">Ime:</label>
-        <input type="text" id="first-name" name="first-name" required>
+    <div class="contact-form">
+        <h2>Kontaktirajte nas</h2>
+        <form id="contact-form">
+            <label for="first-name">Ime:</label>
+            <input type="text" id="first-name" name="first-name" required>
 
-        <label for="last-name">Priimek:</label>
-        <input type="text" id="last-name" name="last-name" required>
+            <label for="last-name">Priimek:</label>
+            <input type="text" id="last-name" name="last-name" required>
 
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email" required>
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required>
 
-        <label for="message">Sporočilo:</label>
-        <textarea id="message" name="message" rows="4" required></textarea>
+            <label for="message">Sporočilo:</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
 
-        <button class="btn" type="submit">Pošlji</button>
-    </form>
-</div>
+            <button class="btn" type="submit">Pošlji</button>
+        </form>
+
+        <!-- Informativni box za sporočilo -->
+        <div id="info-box" class="info-box">Sporočilo poslano</div>
+    </div>
 
 <!-- Google zemljevid -->
 <div class="map-container">
@@ -351,6 +380,27 @@
             const navLinks = document.querySelector('.nav-links');
             navLinks.classList.toggle('active');
         }
+
+ // Funkcija za obravnavo obrazca
+ document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prepreči privzeto pošiljanje obrazca
+
+            // Prikaži informativni box
+            const infoBox = document.getElementById('info-box');
+            infoBox.style.display = 'block';
+
+            // Dodaj animacijo fade-in-out
+            infoBox.classList.add('fade-in-out');
+
+            // Počisti obrazec
+            this.reset();
+
+            // Skrij informativni box po 3 sekundah
+            setTimeout(function() {
+                infoBox.style.display = 'none';
+            }, 2000);
+        });
     </script>
+
 </body>
 </html>
