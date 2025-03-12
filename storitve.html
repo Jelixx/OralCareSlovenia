@@ -26,7 +26,7 @@
 
         /* Navbar */
         .navbar {
-            background: #007BFF;
+            background: #0051a8;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             position: fixed;
             width: 100%;
@@ -98,25 +98,44 @@
 
         /* Kartice z ozadjem in prosojnostjo */
         .service-card {
-            background-image: url('https://thumb.ac-illust.com/8f/8f99958193edeb745abedd67b7f4f2bf_t.jpeg'); /* Dodajte pot do vaše slike */
-            background-size: cover; /* Slika bo prekrila celotno kartico */
-            background-position: center; /* Slika bo poravnana na sredino */
-            background-repeat: no-repeat; /* Slika se ne bo ponavljala */
+            background-image: url('https://thumb.ac-illust.com/8f/8f99958193edeb745abedd67b7f4f2bf_t.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             border-radius: 10px;
             padding: 30px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             text-align: center;
             width: 100%;
-            max-width: 40%; /* Maksimalna širina kartice */
+            max-width: 40%;
             position: relative;
             overflow: hidden;
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            color: #fff; /* Besedilo znotraj kartice bo belo za boljšo berljivost na temnem ozadju */
+            justify-content: center; /* Poravnaj vsebino na sredino */
+            color: #fff;
+            min-height: 200px;
+            align-items: center; /* Centriraj vsebino znotraj kartice */
         }
+
+        .service-price {
+            position: absolute;
+            top: 20px;
+            right: 5px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            text-align: right;
+            white-space: nowrap;
+            align-self: flex-end; /* Poskrbi, da cena ostane v spodnjem desnem kotu */
+        }
+
+
 
         /* Dodajanje prosojnosti ozadju */
         .service-card::before {
@@ -145,66 +164,79 @@
 
         /* Footer */
         footer {
-            background: #2d2f31;
-            color: #d1d1d1;
-            padding: 40px 0;
+            background-color: #0051a8;
+            color: #fff;
+            padding: 50px 20px;
+            margin-top: auto;
             text-align: center;
-            position: relative;
-            bottom: 0;
-            width: 100%;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
         }
+
         .footer-container {
             display: flex;
-            justify-content: center;
+            justify-content: space-around;
             gap: 50px;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding-bottom: 20px;
             flex-wrap: wrap;
+            margin-bottom: 30px;
         }
+
         .footer-column {
-            text-align: left;
             max-width: 300px;
+            text-align: left;
         }
+
         .footer-column h3 {
-            color: #fff;
+            font-size: 20px;
             margin-bottom: 15px;
+            font-weight: 700;
         }
+
         .footer-column ul {
             list-style: none;
             padding: 0;
         }
+
         .footer-column ul li {
             margin-bottom: 10px;
         }
+
         .footer-column ul li a {
-            color: #d1d1d1;
+            color: #ccc;
+            font-size: 16px;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: color 0.3s ease;
         }
+
         .footer-column ul li a:hover {
             color: #fff;
         }
-        .company-info p {
-            font-size: 14px;
-            line-height: 1.5;
-        }
-        .social-icons {
-            margin: 20px 0;
-        }
+
         .social-icons a {
-            color: #d1d1d1;
-            font-size: 20px;
-            margin: 0 10px;
-            display: inline-block;
-            transition: color 0.3s;
+            color: #ccc;
+            font-size: 24px;
+            margin: 0 15px;
+            transition: color 0.3s ease;
         }
+
         .social-icons a:hover {
             color: #fff;
         }
+
         .footer-bottom {
-            margin-top: 20px;
             font-size: 14px;
+            color: #bbb;
+            margin-top: 20px;
+        }
+
+        .footer-bottom a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom a:hover {
+            color: #ccc;
         }
 
         /* Media Queries */
@@ -223,7 +255,7 @@
             .navbar .nav-links {
                 display: none;
                 flex-direction: column;
-                background: #007BFF;
+                background: #0051a8;
                 position: absolute;
                 top: 70px;
                 left: 0;
@@ -297,8 +329,8 @@
             <ul class="nav-links">
                 <li><a href="index.html">Domov</a></li>
                 <li><a href="storitve.html">Storitve</a></li>
-                <li><a href="#faq">Pogosta vprašanja</a></li>
                 <li><a href="kontakt.html">Kontakt</a></li>
+                <li><a href="zaposlitev.html">Pridruži se nam</a></li>
             </ul>
             <div class="hamburger" onclick="toggleMenu()">
                 <div class="line"></div>
@@ -312,42 +344,47 @@
     <div class="main-content">
         <!-- Services Section -->
         <section class="services">
-
             <div class="service-card">
                 <h3 class="service-title">Kontrolni pregled dlesni</h3>
-                <p>Zobozdravnik pregleda stanje dlesni, preveri vnetje, krvavenje in parodontalne žepke, oceni obloge in zobni kamen ter svetuje ustrezno nego za preprečevanje bolezni dlesni.</p>
+                <p>Zobozdravnik pregleda stanje dlesni, preveri vnetje, krvavenje in parodontalne žepke.</p>
+                <p class="service-price">Cena: 30€</p>
             </div>
-
+        
             <div class="service-card">
                 <h3 class="service-title">Luščenje in glajenje zobnih korenin</h3>
-                <p>Odstranjevanje zobnega kamna in oblog ter glajenje površine korenin, kar zmanjšuje vnetje in preprečuje napredovanje parodontalne bolezni.</p>
+                <p>Odstranjevanje zobnega kamna in oblog ter glajenje površine korenin.</p>
+                <p class="service-price">Cena: 50€</p>
             </div>
-
+        
             <div class="service-card">
                 <h3 class="service-title">Meritve žepov in odmika dlesni</h3>
-                <p>Merjenje globine parodontalnih žepkov ter oceno odmika dlesni od zob, kar pomaga pri odkrivanju in spremljanju parodontalne bolezni.</p>
+                <p>Merjenje globine parodontalnih žepkov ter oceno odmika dlesni od zob.</p>
+                <p class="service-price">Cena: 40€</p>
             </div>
-
+        
             <div class="service-card">
                 <h3 class="service-title">Odstanjevanje zobnih oblog</h3>
-                <p>Odstranjevanje mehkih oblog, ki se nabirajo na zobeh in dlesnih, kar preprečuje nastanek zobnega kamna ter zmanjšuje tveganje za vnetje dlesni in karies.</p>
+                <p>Odstranjevanje mehkih oblog, ki se nabirajo na zobeh in dlesnih.</p>
+                <p class="service-price">Cena: 35€</p>
             </div>
-
+        
             <div class="service-card">
                 <h3 class="service-title">Peskanje zobnih površin</h3>
-                <p>Postopek, pri katerem se s pomočjo finega peska odstranijo zobne obloge, pigmentacije in zobni kamen, kar pripomore k čiščenju zob in izboljšanju njihovega izgleda.</p>
+                <p>Postopek, pri katerem se s pomočjo finega peska odstranijo zobne obloge.</p>
+                <p class="service-price">Cena: 45€</p>
             </div>
             
             <div class="service-card">
                 <h3 class="service-title">Poliranje zobnih površin</h3>
-                <p>Glajenje zob po peskanju, da se odstrani morebitne preostale obloge in izboljša sijaj zob, kar pripomore k dolgotrajnejši zaščiti pred nabiranjem oblog.</p>
+                <p>Glajenje zob po peskanju za boljši sijaj in zaščito pred oblogami.</p>
+                <p class="service-price">Cena: 25€</p>
             </div>
-
+        
             <div class="service-card">
                 <h3 class="service-title">Premaz z fluoridnim preparatom</h3>
-                <p>Postopek, pri katerem se na zobne površine nanese fluorid, da se okrepi zobna sklenina, zmanjša občutljivost in prepreči nastanek kariesa.</p>
+                <p>Nanšanje fluorida na zobne površine za okrepitev sklenine in zaščito pred kariesom.</p>
+                <p class="service-price">Cena: 20€</p>
             </div>
-
         </section>
     </div>
 

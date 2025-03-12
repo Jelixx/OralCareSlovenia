@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>OralCare Slovenija</title>
+    <style>
+        /* Reset */
+        body, h1, h2, p, ul, li, a {
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+            list-style: none;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+            min-height: 100vh; /* Za zagotovitev, da footer vedno ostane na dnu */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: #0051a8;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        .navbar .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+        }
+        .navbar .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+        .navbar .nav-links li {
+            list-style: none;
+        }
+        .navbar .nav-links a {
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .navbar .nav-links a:hover {
+            color: #FFD700;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .hamburger .line {
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            margin: 4px 0;
+            transition: all 0.3s ease;
+        }
+
+        .section {
+            padding: 40px;
+            max-width: 1200px;
+            margin: 70px auto;
+        }
+        .section-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .section p {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .job-list {
+            margin-top: 30px;
+        }
+        .job-item {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .job-item h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        .job-item ul {
+            margin-top: 10px;
+        }
+        .job-item li {
+            margin-bottom: 8px;
+        }
+
+        .contact-form {
+            background-color: #fff;
+            width: 60%;
+            max-width: 600px;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .contact-form h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+            color: #0051a8;
+        }
+        .contact-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            resize: none;
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: #0051a8;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+        .btn {
+        background: #FFD700;
+        color: #333;
+        padding: 15px 30px;
+        border-radius: 50px;
+        font-size: 18px;
+        font-weight: bold;
+        transition: background 0.3s ease, color 0.3s ease;
+        border: none;
+        display: block;
+        width: 300px; /* Nastavi fiksno širino gumba */
+        margin: 0 auto; /* Postavi na sredino */
+        text-align: center;
+        }
+
+        .btn1 {
+        background: #FFD700;
+        color: #333;
+        padding: 15px 30px;
+        border-radius: 50px;
+        font-size: 18px;
+        font-weight: bold;
+        transition: background 0.3s ease, color 0.3s ease;
+        border: none;
+        display: block;
+        width: 300px; /* Nastavi fiksno širino gumba */
+        margin: 0 auto; /* Postavi na sredino */
+        text-align: center;
+        margin-bottom: 100px;
+        }
+
+        .btn:hover {
+            background: #FFA500;
+            color: #fff;
+        }
+        .info-box {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-top: 40px;
+            font-size: 16px;
+            font-weight: bold;
+            display: none;
+            z-index: 9999;
+        }
+        .error-box {
+            background-color: #dc3545;
+        }
+        @keyframes fadeInOut {
+            0% { opacity: 0; top: 20px; }
+            20% { opacity: 1; top: 40px; }
+            80% { opacity: 1; top: 40px; }
+            100% { opacity: 0; top: 20px; }
+        }
+        .fade-in-out {
+            animation: fadeInOut 2s ease-out;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0051a8;
+            color: #fff;
+            padding: 50px 20px;
+            margin-top: auto;
+            text-align: center;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        .footer-container {
+            display: flex;
+            justify-content: space-around;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .footer-column {
+            max-width: 300px;
+            text-align: left;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #ccc;
+            font-size: 16px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: #fff;
+        }
+
+        .social-icons a {
+            color: #ccc;
+            font-size: 24px;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #fff;
+        }
+
+        .footer-bottom {
+            font-size: 14px;
+            color: #bbb;
+            margin-top: 20px;
+        }
+
+        .footer-bottom a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom a:hover {
+            color: #ccc;
+        }
+
+        /* Media Queries */
+
+        @media (max-width: 768px) {
+            .navbar .nav-links {
+                display: none;
+                flex-direction: column;
+                background: #007BFF;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                padding: 20px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .navbar .nav-links.active {
+                display: flex;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .footer-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .footer-column {
+                text-align: center;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">OralCare Slovenija</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Domov</a></li>
+                <li><a href="storitve.html">Storitve</a></li>
+                <li><a href="kontakt.html">Kontakt</a></li>
+                <li><a href="zaposlitev.html">Pridruži se nam</a></li>
+            </ul>
+            <div class="hamburger" onclick="toggleMenu()">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+    </nav>
+
+     <!-- Main Content -->
+     <div class="container">
+        <!-- 1. Uvodni opis -->
+        <section class="section">
+            <h2 class="section-title">Uvodni opis</h2>
+            <p><strong>OralCare Slovenija</strong> je vodilno podjetje na področju zobozdravstvene oskrbe, ki se osredotoča na zagotavljanje vrhunskih storitev in skrb za zdravje vašega nasmeha. Naša vizija je ustvariti prostor, kjer stranke in zaposleni uživajo v sproščenem in prijaznem okolju, ob tem pa se nenehno osredotočamo na strokovno rast in inovativnost. Naša ekipa temelji na profesionalizmu, timskem delu in medsebojnem zaupanju.</p>
+            <p>Delo v <strong>OralCare Slovenija</strong> je privlačno zaradi priložnosti za osebni in poklicni razvoj v dinamičnem okolju. Ponujamo odlično podporo za izobraževanje, napredovanje in prilagodljive delovne pogoje, ki spodbujajo ravnotežje med poklicnim in zasebnim življenjem.</p>
+        </section>
+
+        <!-- 2. Odprta delovna mesta -->
+        <section class="section">
+            <h2 class="section-title">Odprta delovna mesta</h2>
+            <div class="job-list">
+                <div class="job-item">
+                    <h3>Zobozdravnik</h3>
+                    <ul>
+                        <li><strong>Naloge</strong>: Pomoč pri diagnosticiranju in zdravljenju zobnih težav, opravljanje rednih zobozdravstvenih pregledov, svetovanje pacientom glede zdravja zob in ustne higiene.</li>
+                        <li><strong>Pogoji zaposlitve</strong>: Polni delovni čas, konkurenčna plača, dodatno izobraževanje in možnosti napredovanja.</li>
+                    </ul>
+                </div>
+
+                <div class="job-item">
+                    <h3>Ustni higienik</h3>
+                    <ul>
+                        <li><strong>Naloge</strong>: Izvajanje profilaktičnih storitev, kot so čiščenje zob, odstranjevanje zobnih oblog, svetovanje pacientom o ustni higieni.</li>
+                        <li><strong>Pogoji zaposlitve</strong>: Polni delovni čas ali možnost fleksibilnega delovnega časa, možnosti za nadaljnje izobraževanje.</li>
+                    </ul>
+                </div>
+
+                <div class="job-item">
+                    <h3>Asistent</h3>
+                    <ul>
+                        <li><strong>Naloge</strong>: Podpora zobozdravniku pri vsakodnevnem delu, priprava pacientov na preglede in zdravljenje, skrb za potrebščine in opremo.</li>
+                        <li><strong>Pogoji zaposlitve</strong>: Polni delovni čas, redna usposabljanja in priložnosti za razvoj.</li>
+                    </ul>
+                </div>
+
+                <div class="job-item">
+                    <h3>Administracija</h3>
+                    <ul>
+                        <li><strong>Naloge</strong>: Upravljanje s klici in e-pošto, obdelava naročil in obveščanje pacientov, administrativna podpora zobozdravstveni ekipi.</li>
+                        <li><strong>Pogoji zaposlitve</strong>: Fleksibilen delovni čas, prijetno in sproščeno delovno okolje, možnosti napredovanja.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Kaj ponujamo -->
+        <section class="section">
+            <h2 class="section-title">Kaj ponujamo</h2>
+            <h3>Ugodnosti</h3>
+            <ul>
+                <li>Konkurenčna plača z možnostjo bonusov za dosego ciljev.</li>
+                <li>Dodatno izobraževanje in usposabljanje za strokovni razvoj.</li>
+                <li>Podpora pri nadaljnjem izobraževanju in certificiranju.</li>
+                <li>Možnosti za napredovanje v podjetju.</li>
+            </ul>
+
+            <h3>Delovni čas</h3>
+            <ul>
+                <li>Prilagodljiv delovni čas za usklajevanje poklicnega in zasebnega življenja.</li>
+                <li>Možnost dela na več lokacijah v Sloveniji za večjo fleksibilnost.</li>
+            </ul>
+        </section>
+    </div>
+
+    <button id="open-form-btn" class="btn1">Prijavi se na zaposlitev</button>
+    <div id="job-form-modal" class="modal">
+        <div class="contact-form">
+            <h2>Prijava na zaposlitev</h2>
+            <form id="job-application-form">
+                <label for="first-name">Ime:</label>
+                <input type="text" id="first-name" name="first-name" required>
+                <label for="last-name">Priimek:</label>
+                <input type="text" id="last-name" name="last-name" required>
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+                <label for="cv">Naložite CV:</label>
+                <input type="file" id="cv" name="cv" required>
+                <label for="description">Predstavitev:</label>
+                <textarea id="description" name="description" rows="4" required></textarea>
+                <button class="btn" type="submit">Pošlji prijavo</button>
+            </form>
+            <button id="close-form-btn" class="btn" style="background: #ff4d4d; margin-top: 10px;">Zapri</button>
+        </div>
+    </div>
+    <div id="info-box" class="info-box">Prijava uspešno poslana</div>
+    <div id="error-box" class="info-box error-box">Prosimo, izpolnite vsa polja pravilno</div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Delovni čas</h3>
+                <ul>
+                    <li><p>ponedeljek-petek: 7.00 - 15.00</p></li>
+                    <li><p>sobota: 8.00 - 12.00</p></li>
+                    <li><p>nedelja in prazniki: zaprto</p></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Kontaktni podatki</h3>
+                <ul>
+                    <li><p>naslov, mesto</p></li>
+                    <li><p>tel: 123 456 789</p></li>
+                    <li><p>email@gmail.com</p></li>
+                </ul>
+            </div>
+            <div class="footer-column company-info">
+                <h3>OralCare Slovenija</h3>
+                <p>V naši ordinaciji skrbimo za zdravje in lepoto vašega nasmeha.
+                    Z vrhunskimi storitvami, sodobno opremo in strokovno ekipo zagotavljamo kakovostno oskrbo.
+                    Naš cilj je prijazno in sproščeno okolje</p>
+            </div>
+        </div>
+
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <div class="footer-bottom">
+            <p>OralCare Slovenija © 2025</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        document.getElementById('open-form-btn').addEventListener('click', function() {
+            document.getElementById('job-form-modal').style.display = 'flex';
+        });
+        document.getElementById('close-form-btn').addEventListener('click', function() {
+            document.getElementById('job-form-modal').style.display = 'none';
+        });
+        
+        document.getElementById('job-application-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const firstName = document.getElementById('first-name').value.trim();
+            const lastName = document.getElementById('last-name').value.trim();
+            const email = document.getElementById('email');
+            const cv = document.getElementById('cv').files.length;
+            const description = document.getElementById('description').value.trim();
+            
+            if (!firstName || !lastName || !email.value.trim() || !email.checkValidity() || cv === 0 || !description) {
+                const errorBox = document.getElementById('error-box');
+                errorBox.style.display = 'block';
+                errorBox.classList.add('fade-in-out');
+                setTimeout(() => {
+                    errorBox.style.display = 'none';
+                }, 2000);
+                return;
+            }
+            
+            this.reset();
+            document.getElementById('job-form-modal').style.display = 'none';
+            const infoBox = document.getElementById('info-box');
+            infoBox.style.display = 'block';
+            infoBox.classList.add('fade-in-out');
+            setTimeout(() => {
+                infoBox.style.display = 'none';
+            }, 2000);
+        });
+    </script>
+
+</body>
+</html>
