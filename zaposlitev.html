@@ -19,9 +19,10 @@
             line-height: 1.6;
             background-color: #f9f9f9;
             color: #333;
-            min-height: 100vh; /* Za zagotovitev, da footer vedno ostane na dnu */
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow: auto; /* Privzeto omogočeno pomikanje */
         }
 
         /* Navbar */
@@ -114,40 +115,78 @@
             margin-bottom: 8px;
         }
 
+        .contact-form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, 0.5); /* Temno ozadje, ki prepreči interakcijo z drugimi elementi */
+            padding: 20px;
+            overflow: auto;
+            z-index: 1001; /* Zagotovimo, da je obrazec nad ozadjem */
+        }
+
         .contact-form {
             background-color: #fff;
-            width: 60%;
+            width: 90%;
             max-width: 600px;
-            padding: 50px;
+            max-height: 90vh; /* Omejitev višine na 90% zaslona */
+            overflow-y: auto; /* Omogoči pomik znotraj obrazca */
+            padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
+
         .contact-form h2 {
             text-align: center;
             margin-bottom: 20px;
-            font-size: 28px;
+            font-size: 24px;
             color: #0051a8;
         }
+
         .contact-form label {
-            display: block;
-            margin-bottom: 8px;
+            align-self: flex-start;
+            margin-bottom: 5px;
             font-weight: 600;
         }
-        .contact-form input, .contact-form textarea {
+
+        .contact-form input, 
+        .contact-form textarea {
             width: 100%;
-            padding: 14px;
-            margin-bottom: 20px;
+            padding: 12px;
+            margin-bottom: 15px;
             border-radius: 4px;
             border: 1px solid #ddd;
             font-size: 16px;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-            resize: none;
         }
-        .contact-form input:focus, .contact-form textarea:focus {
+
+        .contact-form button {
+            width: 100%;
+            padding: 14px;
+            font-size: 18px;
+            border-radius: 50px;
+            background: #FFD700;
+            border: none;
+            font-weight: bold;
+            transition: background 0.3s ease, color 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        .contact-form input:focus, 
+        .contact-form textarea:focus {
             border-color: #0051a8;
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
         }
-        .btn {
+
+    /* Gumbi */
+        .btn, .btn1 {
         background: #FFD700;
         color: #333;
         padding: 15px 30px;
@@ -157,31 +196,35 @@
         transition: background 0.3s ease, color 0.3s ease;
         border: none;
         display: block;
-        width: 300px; /* Nastavi fiksno širino gumba */
-        margin: 0 auto; /* Postavi na sredino */
+        width: 300px;
+        margin: 0 auto;
         text-align: center;
-        }
+    }
 
         .btn1 {
-        background: #FFD700;
-        color: #333;
-        padding: 15px 30px;
-        border-radius: 50px;
-        font-size: 18px;
-        font-weight: bold;
-        transition: background 0.3s ease, color 0.3s ease;
-        border: none;
-        display: block;
-        width: 300px; /* Nastavi fiksno širino gumba */
-        margin: 0 auto; /* Postavi na sredino */
-        text-align: center;
-        margin-bottom: 100px;
-        }
+        margin-bottom: 50px; /* Zmanjšana višina */
+    }
+        .btn:hover, 
+        .btn1:hover {
+        background: #FFA500;
+        color: #fff;
+    }
 
-        .btn:hover {
-            background: #FFA500;
-            color: #fff;
-        }
+        #close-form-btn {
+            width: 100%;
+            padding: 14px;
+            font-size: 18px;
+            border-radius: 50px;
+            border: none;
+            font-weight: bold;
+            transition: background 0.3s ease, color 0.3s ease;
+            background: #ff4d4d; /* Rdeča barva ozadja */
+}
+
+        #close-form-btn:hover {
+    background-color: #e60000; /* Temnejša rdeča ob prehodu miške */
+}
+
         .info-box {
             position: fixed;
             top: 20px;
@@ -210,17 +253,18 @@
             animation: fadeInOut 2s ease-out;
         }
         .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5); /* Zakrijemo ozadje s polprosojno temno barvo */
+        z-index: 1000; /* Visok z-index omogoči, da modalno okno ostane nad vsemi drugimi elementi */
+        align-items: center;
+        justify-content: center;
+    }
+        
 
         /* Footer */
         footer {
@@ -300,34 +344,37 @@
         }
 
         /* Media Queries */
-
         @media (max-width: 768px) {
-            .navbar .nav-links {
-                display: none;
-                flex-direction: column;
-                background: #007BFF;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                padding: 20px;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            }
-            .navbar .nav-links.active {
-                display: flex;
-            }
-            .hamburger {
-                display: flex;
-            }
-            .footer-container {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-            .footer-column {
-                text-align: center;
-            }
-        }
+    .navbar .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #0051a8;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .navbar .nav-links.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-column {
+        text-align: center;
+    }
+}
 
     </style>
 </head>
@@ -432,8 +479,8 @@
                 <label for="description">Predstavitev:</label>
                 <textarea id="description" name="description" rows="4" required></textarea>
                 <button class="btn" type="submit">Pošlji prijavo</button>
-            </form>
-            <button id="close-form-btn" class="btn" style="background: #ff4d4d; margin-top: 10px;">Zapri</button>
+            <button id="close-form-btn" class="btn">Zapri</button>
+        </form>
         </div>
     </div>
     <div id="info-box" class="info-box">Prijava uspešno poslana</div>
@@ -515,6 +562,16 @@
             setTimeout(() => {
                 infoBox.style.display = 'none';
             }, 2000);
+        });
+
+            document.getElementById('open-form-btn').addEventListener('click', function() {
+            document.getElementById('job-form-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Onemogoči pomikanje po strani
+        });
+
+            document.getElementById('close-form-btn').addEventListener('click', function() {
+            document.getElementById('job-form-modal').style.display = 'none';
+            document.body.style.overflow = 'auto'; // Omogoči ponovno pomikanje
         });
     </script>
 

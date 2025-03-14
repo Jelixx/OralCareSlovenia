@@ -20,6 +20,9 @@
             background-color: #f9f9f9;
             color: #333;
         }
+        body.modal-open {
+            overflow: hidden; /* Onemogoči drsenje strani */
+        }
 
         /* Navbar */
         .navbar {
@@ -174,17 +177,41 @@
         border-radius: 5px;
         border: 1px solid #ccc;
     }
-    .submit-btn {
-        background-color: #0056b3;
-        color: white;
+    .btn .submit-btn {
+            width: 100%;
+            padding: 14px;
+            font-size: 18px;
+            border-radius: 50px;
+            background: #FFD700;
+            border: none;
+            font-weight: bold;
+            transition: background 0.3s ease, color 0.3s ease;
+            margin-bottom: 10px;
+        }
+    .btn1 {
+        width: 50%;
+        padding: 14px;
+        font-size: 18px;
+        border-radius: 50px;
         border: none;
-        padding: 10px;
-        width: 100%;
-        border-radius: 5px;
-        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s ease, color 0.3s ease;
+        background: #ff4d4d; /* Rdeča barva ozadja */
+}
+    .btn1:hover {
+        background-color: #e60000; /* Temnejša rdeča ob prehodu miške */
     }
-    .submit-btn:hover {
-        background-color: #0056b3;
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    .button-group .btn {
+        width: 48%;
+        font-size: 16px;
+        padding: 10px;
+        cursor: pointer;
     }
     .comments-container {
         margin-top: 20px;
@@ -448,7 +475,6 @@ footer {
     <!-- Pojavno okno za oddajo mnenja -->
     <div id="reviewModal" class="modal" style="display: none;">
         <div class="modal-content">
-            <span class="close" onclick="closeReviewModal()">&times;</span>
             <h3>Oddajte svoje mnenje</h3>
             <label for="stars">Ocena:</label>
             <select id="stars">
@@ -462,7 +488,10 @@ footer {
             <input type="text" id="name" placeholder="Vnesite svoje ime">
             <label for="comment">Vaše mnenje:</label>
             <textarea id="comment" placeholder="Napišite svoje mnenje..."></textarea>
-            <button class="btn submit-btn" onclick="submitReview()">Oddaj mnenje</button>
+            <div class="button-group">
+                <button class="btn submit-btn" onclick="submitReview()">Oddaj mnenje</button>
+                <button class="btn1" onclick="closeReviewModal()">Zapri</button>
+            </div>
         </div>
     </div>
 
@@ -512,10 +541,12 @@ footer {
 
 function openReviewModal() {
     document.getElementById('reviewModal').style.display = 'flex';
+    document.body.classList.add('modal-open'); // Onemogoči samo drsenje
 }
 
 function closeReviewModal() {
     document.getElementById('reviewModal').style.display = 'none';
+    document.body.classList.remove('modal-open'); // Omogoči drsenje
 }
 
 function submitReview() {
