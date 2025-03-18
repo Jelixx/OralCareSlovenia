@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ambulanta za ustno higieno OralCareSlovenia, profesionalne storitve v vaši bližini.">  
+    <meta name="keywords" content="ustna higiena, beljenje zob, zobni kamen"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>OralCare Slovenija</title>
     <style>
@@ -380,25 +382,50 @@
             navLinks.classList.toggle('active');
         }
 
- // Funkcija za obravnavo obrazca
- document.getElementById('contact-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prepreči privzeto pošiljanje obrazca
+// Funkcija za obravnavo obrazca
+document.getElementById('contact-form').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prepreči privzeto pošiljanje obrazca
 
-            // Prikaži informativni box
-            const infoBox = document.getElementById('info-box');
-            infoBox.style.display = 'block';
+    // Pridobi podatke iz obrazca
+    const firstName = document.getElementById('first-name').value.trim();
+    const lastName = document.getElementById('last-name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
 
-            // Dodaj animacijo fade-in-out
-            infoBox.classList.add('fade-in-out');
+    if (firstName && lastName && email && message) {
+        let submissions = JSON.parse(localStorage.getItem('contactForms')) || [];
 
-            // Počisti obrazec
-            this.reset();
+        // Shrani nov obrazec
+        submissions.unshift({ firstName, lastName, email, message, date: new Date().toLocaleString() });
+        localStorage.setItem('contactForms', JSON.stringify(submissions));
 
-            // Skrij informativni box po 3 sekundah
-            setTimeout(function() {
-                infoBox.style.display = 'none';
-            }, 2000);
-        });
+    // Prikaži informativni box
+    const infoBox = document.getElementById('info-box');
+    infoBox.style.display = 'block';
+    infoBox.classList.add('fade-in-out');
+
+    // Ko animacija konča, skrij informativni box
+    infoBox.addEventListener('animationend', function() {
+        infoBox.style.display = 'none';
+    });
+    
+        // Počisti obrazec
+        this.reset();
+    } else {
+        alert('Prosimo, izpolnite vsa polja!');
+    }
+});
+
+// Funkcija za pridobitev in prikaz shranjenih obrazcev
+function loadContactForms() {
+    let submissions = JSON.parse(localStorage.getItem('contactForms')) || [];
+    console.log("Shranjeni obrazci:", submissions);
+}
+
+// Naloži obrazce ob zagonu strani
+document.addEventListener("DOMContentLoaded", loadContactForms);
+
+
     </script>
 
 </body>

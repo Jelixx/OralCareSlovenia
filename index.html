@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ambulanta za ustno higieno OralCareSlovenia, profesionalne storitve v vaši bližini.">  
+    <meta name="keywords" content="ustna higiena, beljenje zob, zobni kamen"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>OralCare Slovenija</title>
     <style>
@@ -176,6 +178,7 @@
         margin: 10px 0;
         border-radius: 5px;
         border: 1px solid #ccc;
+        resize: none;
     }
     .btn .submit-btn {
             width: 100%;
@@ -539,9 +542,11 @@ footer {
 
         let editingReview = null; // Spremljevalec za urejanje komentarja
 
+document.addEventListener("DOMContentLoaded", loadReviews);
+
 function openReviewModal() {
     document.getElementById('reviewModal').style.display = 'flex';
-    document.body.classList.add('modal-open'); // Onemogoči samo drsenje
+    document.body.classList.add('modal-open'); // Onemogoči drsenje
 }
 
 function closeReviewModal() {
@@ -553,22 +558,21 @@ function submitReview() {
     const stars = document.getElementById('stars').value;
     const name = document.getElementById('name').value.trim();
     const comment = document.getElementById('comment').value.trim();
+
     if (name && comment) {
-        if (editingReview) {
-            // Posodobi obstoječi komentar
-            editingReview.querySelector('strong').innerText = name;
-            editingReview.querySelector('p').innerText = comment;
-            editingReview.querySelector('div').innerHTML = '★'.repeat(stars);
-            editingReview = null; // Po zaključku urejanja ponastavi
+        let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+
+        if (editingReview !== null) {
+            // Posodobitev obstoječega komentarja
+            reviews[editingReview] = { name, stars, comment };
+            editingReview = null; 
         } else {
             // Dodaj nov komentar
-            const reviewHtml = `<div class='review'><strong>${name}</strong><div>${'★'.repeat(stars)}</div><p>${comment}</p><button class='edit-btn' onclick='editReview(this)'>Uredi</button><button class='delete-btn' onclick='deleteReview(this)'>Izbriši</button></div>`;
-            const commentsList = document.getElementById('comments-list');
-            commentsList.insertAdjacentHTML('afterbegin', reviewHtml);
-            while (commentsList.children.length > 3) {
-                commentsList.removeChild(commentsList.lastChild);
-            }
+            reviews.unshift({ name, stars, comment });
         }
+
+        localStorage.setItem('reviews', JSON.stringify(reviews));
+        renderReviews();
         document.getElementById('name').value = '';
         document.getElementById('comment').value = '';
         document.getElementById('stars').value = '5';
@@ -579,18 +583,46 @@ function submitReview() {
     }
 }
 
-function editReview(button) {
-    const review = button.parentElement;
-    document.getElementById('name').value = review.querySelector('strong').innerText;
-    document.getElementById('comment').value = review.querySelector('p').innerText;
-    document.getElementById('stars').value = review.querySelector('div').innerText.length;
-    editingReview = review; // Nastavi, da bomo urejali ta komentar
+function renderReviews() {
+    const commentsList = document.getElementById('comments-list');
+    commentsList.innerHTML = '';
+
+    const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+
+    reviews.slice(0, 3).forEach((review, index) => {
+        const reviewHtml = `<div class='review' data-index="${index}">
+            <strong>${review.name}</strong>
+            <div>${'★'.repeat(review.stars)}</div>
+            <p>${review.comment}</p>
+            <button class='edit-btn' onclick='editReview(${index})'>Uredi</button>
+            <button class='delete-btn' onclick='deleteReview(${index})'>Izbriši</button>
+        </div>`;
+        commentsList.insertAdjacentHTML('beforeend', reviewHtml);
+    });
+}
+
+function editReview(index) {
+    let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+    const review = reviews[index];
+
+    document.getElementById('name').value = review.name;
+    document.getElementById('comment').value = review.comment;
+    document.getElementById('stars').value = review.stars;
+    
+    editingReview = index; // Shranimo indeks urejanega komentarja
     openReviewModal();
 }
 
-function deleteReview(button) {
-    button.parentElement.remove();
+function deleteReview(index) {
+    let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+    reviews.splice(index, 1);
+    localStorage.setItem('reviews', JSON.stringify(reviews));
+    renderReviews();
     showInfoBox(); // Prikaz infoboxa po brisanju
+}
+
+function loadReviews() {
+    renderReviews();
 }
 
 function showInfoBox() {
@@ -613,9 +645,6 @@ function showInfoBox() {
         infoBox.style.display = 'none'; // Skrijemo infobox po animaciji
     }, 1900); // Čas animacije je 2 sekundi
 }
-
-
-
     </script>
 
 <div id="infoBox" class="info-box">

@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ambulanta za ustno higieno OralCareSlovenia, profesionalne storitve v vaši bližini.">  
+    <meta name="keywords" content="ustna higiena, beljenje zob, zobni kamen">  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <title>OralCare Slovenija</title>
     <style>
@@ -80,40 +82,96 @@
             transition: all 0.3s ease;
         }
 
-        .section {
-            padding: 40px;
-            max-width: 1200px;
-            margin: 70px auto;
-        }
-        .section-title {
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        .section p {
-            font-size: 18px;
-            margin-bottom: 15px;
-        }
-        .job-list {
-            margin-top: 30px;
-        }
-        .job-item {
-            background-color: #fff;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        .job-item h3 {
-            font-size: 22px;
-            margin-bottom: 10px;
-        }
-        .job-item ul {
-            margin-top: 10px;
-        }
-        .job-item li {
-            margin-bottom: 8px;
-        }
+    /* Main Sections */
+    .section {
+        padding: 60px 20px;
+        max-width: 1200px;
+        margin: 20px auto;
+    }
+
+    .section-title {
+        font-size: 32px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .section p {
+        font-size: 18px;
+        margin-bottom: 20px;
+        text-align: center;
+        line-height: 1.8;
+    }
+
+        /* Stil za kvadratni element */
+        .offer-box {
+        width: 80%;
+        max-width: 50%; /* Omejitev širine */
+        padding: 20px;
+        background-color: #f4f4f4;
+        border: 2px solid #0051a8;
+        border-radius: 8px;
+        margin: 40px auto; /* Centriranje elementa */
+        text-align: center;
+    }
+
+    .offer-box h3 {
+        font-size: 24px;
+        color: #0051a8;
+        margin-bottom: 20px;
+    }
+
+    .offer-box ul {
+        list-style-type: none;
+        padding: 0;
+        font-size: 16px;
+        color: #666;
+    }
+
+    .offer-box ul li {
+        margin-bottom: 10px;
+    }
+
+ /* Delovna mesta */
+ .job-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Dva elementa na vrstico */
+        gap: 30px; /* Prostor med karticami */
+        max-width: 1200px; /* Omeji širino kartic */
+        margin: 0 auto; /* Centriraj na sredino strani */
+    }
+
+    .job-item {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .job-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .job-item h3 {
+        font-size: 22px;
+        color: #0051a8;
+        margin-bottom: 10px;
+        font-weight: 700;
+    }
+
+    .job-item ul {
+        margin-top: 10px;
+        font-size: 16px;
+        color: #666;
+    }
+
+    .job-item ul li {
+        margin-bottom: 8px;
+    }
+
 
         .contact-form-container {
             display: flex;
@@ -165,6 +223,7 @@
             border-radius: 4px;
             border: 1px solid #ddd;
             font-size: 16px;
+            resize: none;
         }
 
         .contact-form button {
@@ -399,54 +458,11 @@
 
      <!-- Main Content -->
      <div class="container">
-        <!-- 1. Uvodni opis -->
-        <section class="section">
-            <h2 class="section-title">Uvodni opis</h2>
-            <p><strong>OralCare Slovenija</strong> je vodilno podjetje na področju zobozdravstvene oskrbe, ki se osredotoča na zagotavljanje vrhunskih storitev in skrb za zdravje vašega nasmeha. Naša vizija je ustvariti prostor, kjer stranke in zaposleni uživajo v sproščenem in prijaznem okolju, ob tem pa se nenehno osredotočamo na strokovno rast in inovativnost. Naša ekipa temelji na profesionalizmu, timskem delu in medsebojnem zaupanju.</p>
-            <p>Delo v <strong>OralCare Slovenija</strong> je privlačno zaradi priložnosti za osebni in poklicni razvoj v dinamičnem okolju. Ponujamo odlično podporo za izobraževanje, napredovanje in prilagodljive delovne pogoje, ki spodbujajo ravnotežje med poklicnim in zasebnim življenjem.</p>
-        </section>
-
-        <!-- 2. Odprta delovna mesta -->
-        <section class="section">
-            <h2 class="section-title">Odprta delovna mesta</h2>
-            <div class="job-list">
-                <div class="job-item">
-                    <h3>Zobozdravnik</h3>
-                    <ul>
-                        <li><strong>Naloge</strong>: Pomoč pri diagnosticiranju in zdravljenju zobnih težav, opravljanje rednih zobozdravstvenih pregledov, svetovanje pacientom glede zdravja zob in ustne higiene.</li>
-                        <li><strong>Pogoji zaposlitve</strong>: Polni delovni čas, konkurenčna plača, dodatno izobraževanje in možnosti napredovanja.</li>
-                    </ul>
-                </div>
-
-                <div class="job-item">
-                    <h3>Ustni higienik</h3>
-                    <ul>
-                        <li><strong>Naloge</strong>: Izvajanje profilaktičnih storitev, kot so čiščenje zob, odstranjevanje zobnih oblog, svetovanje pacientom o ustni higieni.</li>
-                        <li><strong>Pogoji zaposlitve</strong>: Polni delovni čas ali možnost fleksibilnega delovnega časa, možnosti za nadaljnje izobraževanje.</li>
-                    </ul>
-                </div>
-
-                <div class="job-item">
-                    <h3>Asistent</h3>
-                    <ul>
-                        <li><strong>Naloge</strong>: Podpora zobozdravniku pri vsakodnevnem delu, priprava pacientov na preglede in zdravljenje, skrb za potrebščine in opremo.</li>
-                        <li><strong>Pogoji zaposlitve</strong>: Polni delovni čas, redna usposabljanja in priložnosti za razvoj.</li>
-                    </ul>
-                </div>
-
-                <div class="job-item">
-                    <h3>Administracija</h3>
-                    <ul>
-                        <li><strong>Naloge</strong>: Upravljanje s klici in e-pošto, obdelava naročil in obveščanje pacientov, administrativna podpora zobozdravstveni ekipi.</li>
-                        <li><strong>Pogoji zaposlitve</strong>: Fleksibilen delovni čas, prijetno in sproščeno delovno okolje, možnosti napredovanja.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. Kaj ponujamo -->
-        <section class="section">
-            <h2 class="section-title">Kaj ponujamo</h2>
+    <section class="section">
+        <h2 class="section-title">Kaj ponujamo</h2>
+        
+        <!-- Kvadraten element za Kaj ponujamo -->
+        <div class="offer-box">
             <h3>Ugodnosti</h3>
             <ul>
                 <li>Konkurenčna plača z možnostjo bonusov za dosego ciljev.</li>
@@ -460,6 +476,42 @@
                 <li>Prilagodljiv delovni čas za usklajevanje poklicnega in zasebnega življenja.</li>
                 <li>Možnost dela na več lokacijah v Sloveniji za večjo fleksibilnost.</li>
             </ul>
+        </div>
+    </section>
+    </div>
+
+        <!-- 2. Odprta delovna mesta -->
+        <section class="section">
+            <h2 class="section-title">Odprta delovna mesta</h2>
+            <div class="job-list">
+                <div class="job-item">
+                    <h3>Zobozdravnik</h3>
+                    <ul>
+                        <li><strong>Naloge</strong>: Pomoč pri diagnosticiranju in zdravljenju zobnih težav, opravljanje rednih zobozdravstvenih pregledov, svetovanje pacientom glede zdravja zob in ustne higiene.</li>
+                    </ul>
+                </div>
+
+                <div class="job-item">
+                    <h3>Ustni higienik</h3>
+                    <ul>
+                        <li><strong>Naloge</strong>: Izvajanje profilaktičnih storitev, kot so čiščenje zob, odstranjevanje zobnih oblog, svetovanje pacientom o ustni higieni.</li>
+                    </ul>
+                </div>
+
+                <div class="job-item">
+                    <h3>Asistent</h3>
+                    <ul>
+                        <li><strong>Naloge</strong>: Podpora zobozdravniku pri vsakodnevnem delu, priprava pacientov na preglede in zdravljenje, skrb za potrebščine in opremo.</li>
+                    </ul>
+                </div>
+
+                <div class="job-item">
+                    <h3>Administracija</h3>
+                    <ul>
+                        <li><strong>Naloge</strong>: Upravljanje s klici in e-pošto, obdelava naročil in obveščanje pacientov, administrativna podpora zobozdravstveni ekipi.</li>
+                    </ul>
+                </div>
+            </div>
         </section>
     </div>
 
@@ -484,7 +536,6 @@
         </div>
     </div>
     <div id="info-box" class="info-box">Prijava uspešno poslana</div>
-    <div id="error-box" class="info-box error-box">Prosimo, izpolnite vsa polja pravilno</div>
 
     <!-- Footer -->
     <footer>
@@ -524,55 +575,87 @@
     </footer>
 
     <script>
-        function toggleMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.classList.toggle('active');
-        }
-
-        document.getElementById('open-form-btn').addEventListener('click', function() {
-            document.getElementById('job-form-modal').style.display = 'flex';
-        });
-        document.getElementById('close-form-btn').addEventListener('click', function() {
-            document.getElementById('job-form-modal').style.display = 'none';
-        });
         
-        document.getElementById('job-application-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const firstName = document.getElementById('first-name').value.trim();
-            const lastName = document.getElementById('last-name').value.trim();
-            const email = document.getElementById('email');
-            const cv = document.getElementById('cv').files.length;
-            const description = document.getElementById('description').value.trim();
-            
-            if (!firstName || !lastName || !email.value.trim() || !email.checkValidity() || cv === 0 || !description) {
-                const errorBox = document.getElementById('error-box');
-                errorBox.style.display = 'block';
-                errorBox.classList.add('fade-in-out');
-                setTimeout(() => {
-                    errorBox.style.display = 'none';
-                }, 2000);
-                return;
-            }
-            
-            this.reset();
-            document.getElementById('job-form-modal').style.display = 'none';
-            const infoBox = document.getElementById('info-box');
-            infoBox.style.display = 'block';
-            infoBox.classList.add('fade-in-out');
-            setTimeout(() => {
-                infoBox.style.display = 'none';
-            }, 2000);
-        });
+    function toggleMenu() {
+    const navLinks = document.querySelector('.nav-links');
+    navLinks.classList.toggle('active');
+        }
+    
+// Funkcija za shranjevanje podatkov obrazca v Local Storage
+function saveFormData() {
+    const formData = {
+        firstName: document.getElementById('first-name').value.trim(),
+        lastName: document.getElementById('last-name').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        description: document.getElementById('description').value.trim(),
+    };
 
-            document.getElementById('open-form-btn').addEventListener('click', function() {
-            document.getElementById('job-form-modal').style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // Onemogoči pomikanje po strani
-        });
+    // Pridobimo obstoječe obrazce iz Local Storage
+    let savedData = JSON.parse(localStorage.getItem('jobApplications')) || [];
 
-            document.getElementById('close-form-btn').addEventListener('click', function() {
-            document.getElementById('job-form-modal').style.display = 'none';
-            document.body.style.overflow = 'auto'; // Omogoči ponovno pomikanje
-        });
+    // Dodamo novi obrazec v seznam
+    savedData.push(formData);
+
+    // Shranimo posodobljen seznam nazaj v Local Storage
+    localStorage.setItem('jobApplications', JSON.stringify(savedData));
+}
+
+// Funkcija za nalaganje podatkov iz Local Storage
+function loadFormData() {
+    const savedData = JSON.parse(localStorage.getItem('jobApplications'));
+    if (savedData && savedData.length > 0) {
+        // Tu lahko naložiš prvi obrazec ali prikažeš seznam obrazcev, če želiš
+        const formData = savedData[savedData.length - 1]; // Naloži zadnji vnos
+        document.getElementById('first-name').value = formData.firstName || '';
+        document.getElementById('last-name').value = formData.lastName || '';
+        document.getElementById('email').value = formData.email || '';
+        document.getElementById('description').value = formData.description || '';
+    }
+}
+
+// Ob odprtju obrazca (klik na gumb), vedno izpraznimo obrazec
+document.getElementById('open-form-btn').addEventListener('click', function () {
+    // Izpraznimo obrazec ob vsakem odpiranju
+    document.getElementById('job-application-form').reset();
+
+    document.getElementById('job-form-modal').style.display = 'flex';
+    document.body.style.overflow = 'hidden'; // Onemogoči pomikanje po strani
+});
+
+// Zapri obrazec ob kliku na gumb "Zapri" in omogoči ponovno pomikanje
+const closeFormBtn = document.getElementById('close-form-btn');
+if (closeFormBtn) {
+    closeFormBtn.addEventListener('click', function (event) {
+        event.preventDefault();
+        document.getElementById('job-form-modal').style.display = 'none';
+        document.body.style.overflow = 'auto'; // Omogoči ponovno pomikanje
+    });
+}
+
+document.getElementById('job-application-form').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const firstName = document.getElementById('first-name').value.trim();
+    const lastName = document.getElementById('last-name').value.trim();
+    const email = document.getElementById('email');
+    const cv = document.getElementById('cv').files.length;
+    const description = document.getElementById('description').value.trim();
+
+    document.body.style.overflow = 'auto'; // Omogoči ponovno pomikanje
+
+    // Shrani podatke v Local Storage
+    saveFormData();
+
+    this.reset(); // Ponastavi obrazec po oddaji
+    document.getElementById('job-form-modal').style.display = 'none';
+    const infoBox = document.getElementById('info-box');
+    infoBox.style.display = 'block';
+    infoBox.classList.add('fade-in-out');
+    setTimeout(() => {
+        infoBox.style.display = 'none';
+    }, 2000);
+});
+
     </script>
 
 </body>
